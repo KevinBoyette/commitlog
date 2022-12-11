@@ -8,10 +8,10 @@ class StateSpec extends AnyFlatSpec with ParallelTestExecution {
   val message = "example message"
   val cases = List(
     // (input, expected)
-    ( Wip(message), Done(message)),
+    (Wip(message), Done(message)),
     (Done(message), Done(message)),
-    (Todo(message),  Wip(message)),
-    (Null(message), Null(message)),
+    (Todo(message), Wip(message)),
+    (Null(message), Null(message))
   )
 
   cases.foreach { case (input, expected) =>
