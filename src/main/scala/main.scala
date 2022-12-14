@@ -23,9 +23,9 @@ def uuid() = randomUUID()
 case class Entry(date: LocalDate, id: UUID, state: State)
 
 object Entry {
-  def from(state: State): Entry = {
+  def from(state: State): Entry =
     Entry(now(), uuid(), state)
-  }
+
   def change(entry: Entry): Entry =
     Entry(entry.date, entry.id, transition(entry.state))
 }
@@ -35,13 +35,13 @@ def main(): Unit = {
   val initial = Todo("first case")
   val entry   = Entry.change(Entry.from(Wip("this is a case")))
   val entries = List(
-    Entry.from(Todo("example")),
-    Entry.from(Wip("example")),
-    Entry.from(Done("example")),
-    Entry.from(Wip("example")),
-    Entry.from(Null("example"))
+    Entry.from(Todo("this is a test case that will be moved")),
+    Entry.from(Wip("another example to do")),
+    Entry.from(Done("example thing that needs to be done")),
+    Entry.from(Wip("another wip test case")),
+    Entry.from(Null("a case that has been deleted, but exists in commitlog"))
   )
-  println(entries.map(x => Entry.change(x)))
+  entries.map(x => println(Entry.change(x)))
 
   println(transition(initial))
   println(entry)
